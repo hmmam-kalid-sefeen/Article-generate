@@ -1,26 +1,27 @@
 import streamlit as st
+import google.generativeai as genai
 
-# واجهة التطبيق
-st.title("مولد محتوى المقالات الذكي")
-st.write("أدخل كلمة مفتاحية وسأقوم بتوليد محتوى كامل لك!")
+# إعداد مفتاح الـ API الخاص بـ Gemini
+genai.configure(api_key="ضع_مفتاحك_هنا")
 
-# مربع الإدخال
-keyword = st.text_input("أدخل الكلمة المفتاحية هنا:")
+# اختيار النموذج
+model = genai.GenerativeModel('gemini-pro')
+
+st.title("مولد المحتوى الذكي (بواسطة Gemini)")
+
+keyword = st.text_input("أدخل الكلمة المفتاحية:")
 
 if st.button("توليد المحتوى"):
     if keyword:
-        # هنا يمكنك استبدال النصوص بـ API للذكاء الاصطناعي لاحقاً
-        # حالياً، هذا نموذج تجريبي بسيط
-        st.subheader("العنوان المقترح:")
-        st.write(f"دليل شامل حول: {keyword}")
-        
-        st.subheader("الوصف (Meta Description):")
-        st.write(f"اكتشف كل ما تحتاج معرفته عن {keyword} في هذا المقال المفصل.")
-        
-        st.subheader("الهاشتاقات:")
-        st.write(f"#{keyword.replace(' ', '')} #مقال #معلومات #{keyword}_Tips")
-        
-        st.subheader("المقالة:")
-        st.write(f"تعد {keyword} من المواضيع الهامة التي تشغل بال الكثيرين... (يمكنك هنا ربط API ليقوم بكتابة مقال كامل).")
+        with st.spinner('جاري إنشاء المحتوى...'):
+            try:
+                # إرسال الطلب لـ Gemini
+                prompt = f"اكتب لي عنواناً جذاباً، وصفاً قصيراً، هاشتاقات مناسبة، ومقالاً مفصلاً عن موضوع: {keyword}. يرجى الكتابة باللغة العربية."
+                response = model.generate_content(prompt)
+                
+                # عرض النتيجة
+                st.markdown(response.text)
+            except Exception as e:
+                st.error(f"حدث خطأ: {e}")
     else:
-        st.warning("الرجاء إدخال كلمة مفتاحية!")
+        st.warning("الرجاء إدخال كلمة!")
