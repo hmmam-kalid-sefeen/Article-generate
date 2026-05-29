@@ -4,7 +4,7 @@ import google.generativeai as genai
 # إعداد المفتاح من إعدادات Streamlit السرية
 # تأكد أن الاسم في Secrets هو GEMINI_API_KEY
 if "GEMINI_API_KEY" in st.secrets:
-    genai.configure(api_key=st.secrets["AIzaSyDu0qj6_ttEpYiO4KxPRz9Lm94iVDVc8Z4"])
+    genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
     model = genai.GenerativeModel('gemini-1.5-flash')
 else:
     st.error("مفتاح API غير موجود في إعدادات Secrets. الرجاء إضافته.")
