@@ -1,9 +1,9 @@
-import streamlit as st
+نimport streamlit as st
 import google.generativeai as genai
 
 # إعداد مفتاح الـ API الخاص بـ Gemini
 # تأكد من استبدال 'ضع_مفتاحك_هنا' بمفتاحك الحقيقي
-genai.configure(api_key="AIzaSyA9lXNaZd-8qk7YFnkbky2mTOP_lZqi8gY")
+genai.configure(api_key="AQ.Ab8RN6J5VFghUNBAMHiCoMv3n1RWTSFJfdFoTUWrXq1mJLD3OQ")
 
 # اختيار النموذج المحدث
 model = genai.GenerativeModel('gemini-1.5-flash')
