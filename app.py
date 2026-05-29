@@ -1,29 +1,23 @@
-نimport streamlit as st
+import streamlit as st
 import google.generativeai as genai
 
-# إعداد مفتاح الـ API الخاص بـ Gemini
-# تأكد من استبدال 'ضع_مفتاحك_هنا' بمفتاحك الحقيقي
-genai.configure(api_key="AQ.Ab8RN6J5VFghUNBAMHiCoMv3n1RWTSFJfdFoTUWrXq1mJLD3OQ")
+# إعداد مفتاح الـ API
+genai.configure(api_key="AIzaSyDu0qj6_ttEpYiO4KxPRz9Lm94iVDVc8Z4")
 
-# اختيار النموذج المحدث
+# تعريف النموذج
 model = genai.GenerativeModel('gemini-1.5-flash')
 
-st.title("مولد المحتوى الذكي (بواسطة Gemini)")
+st.title("مولد المحتوى الذكي")
 
-# مربع الإدخال
 keyword = st.text_input("أدخل الكلمة المفتاحية:")
 
 if st.button("توليد المحتوى"):
     if keyword:
         with st.spinner('جاري إنشاء المحتوى...'):
             try:
-                # إرسال الطلب لـ Gemini
-                prompt = f"اكتب لي عنواناً جذاباً، وصفاً قصيراً، هاشتاقات مناسبة، ومقالاً مفصلاً عن موضوع: {keyword}. يرجى الكتابة باللغة العربية."
-                response = model.generate_content(prompt)
-                
-                # عرض النتيجة
+                response = model.generate_content(f"اكتب لي عنواناً، وصفاً، هاشتاقات، ومقالاً مفصلاً عن: {keyword}")
                 st.markdown(response.text)
             except Exception as e:
                 st.error(f"حدث خطأ: {e}")
     else:
-        st.warning("الرجاء إدخال كلمة!")
+        st.warning("الرجاء إدخال كلمة مفتاحية!")
