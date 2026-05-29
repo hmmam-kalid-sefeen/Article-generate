@@ -2,13 +2,15 @@ import streamlit as st
 import google.generativeai as genai
 
 # إعداد مفتاح الـ API الخاص بـ Gemini
+# تأكد من استبدال 'ضع_مفتاحك_هنا' بمفتاحك الحقيقي
 genai.configure(api_key="AIzaSyA9lXNaZd-8qk7YFnkbky2mTOP_lZqi8gY")
 
-# اختيار النموذج
-model = genai.GenerativeModel('gemini-pro')
+# اختيار النموذج المحدث
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 st.title("مولد المحتوى الذكي (بواسطة Gemini)")
 
+# مربع الإدخال
 keyword = st.text_input("أدخل الكلمة المفتاحية:")
 
 if st.button("توليد المحتوى"):
